@@ -3,7 +3,26 @@ from tkinter import *
 from tkinter import messagebox
 
 #funciones de la app
+
 # entar  menu academico
+def abrir_toplevel_datos():
+    global Toplevel_datos
+    abrir_toplevel_datos = Toplevel()
+    abrir_toplevel_datos.title("informacion_academica")
+    abrir_toplevel_datos.resizable(False,False)
+    abrir_toplevel_datos.geometry("350x350")
+    abrir_toplevel_datos.config(bg="thistle")
+
+#entrar menu medico general
+def abrir_toplevel_salud():
+    global toplevel_salud
+    abrir_toplevel_salud = Toplevel()
+    abrir_toplevel_salud.title("informacion_medica_general")
+    abrir_toplevel_salud.resizable(False,False)
+    abrir_toplevel_salud.geometry("350x350")
+    abrir_toplevel_salud.config(bg="thistle")    
+
+ 
 def entrar():
     messagebox.showinfo("informacion", "¿desea ingresar?")
     cent = int(nombre.get())
@@ -14,7 +33,7 @@ def salir():
     cent = int(nombre.get())
     # salir
 def salir():
-    messagebox.showinfo("Temperatura 1.0", "La app se va a cerrar")
+    messagebox.showinfo("colegio_san_jose_de_gualenta", "La app se va a cerrar")
     ventana_principal.destroy()
  
 
@@ -40,6 +59,8 @@ nombre = StringVar()
 grado = StringVar()
 codigo = StringVar()
 tarjeta_identidad = StringVar()
+global img_salud
+global img_datos
 
 #--------------------------------
 # barra menu
@@ -58,16 +79,36 @@ menu_salir.add_command(label="Salir", command=salir)
 barra_menu.add_cascade(label="entrar", menu=menu_entrar)
 barra_menu.add_cascade(label="Salir", menu=menu_salir)
 
+#-------------------------------
 # frame entrada datos
 #--------------------------------
 frame_entrada = Frame(ventana_principal)
-frame_entrada.config(bg="medium purple", width=490, height=180)
+frame_entrada.config(bg="medium purple", width=500, height=500)
 frame_entrada.place(x=10, y=10)
 
 #logo app
 logo=PhotoImage(file="img/escudo_colegio.png")
 lb_logo=Label(ventana_principal, image=logo, bg="thistle")
 lb_logo.place(x=10,y=50)
+
+
+#boton para datos academicos
+datos=PhotoImage(file="img/datos.png")
+bt_datos =Button(frame_entrada, command=abrir_toplevel_datos)
+bt_datos.config(image=datos, width=150, height=150)
+bt_datos.place(x=50, y=300)
+
+#boton para salud
+salud=PhotoImage(file="img/salud.png")
+bt_salud =Button(frame_entrada, command=abrir_toplevel_salud)
+bt_salud.config(image=salud, width=150, height=150)
+bt_salud.place(x=300, y=300)
+
+# creamos los objetos para cada imagen
+img_salud = PhotoImage(file="img/salud.png")
+img_datos = PhotoImage(file="img/datos.png")
+
+
 
 # titulo de la app
 titulo = Label(ventana_principal, text="colegio san jose de guanenta")
@@ -107,13 +148,10 @@ lb_nombre = Label(frame_entrada, text = "codigo: ")
 lb_nombre.config(bg="cyan", fg="black", font=("garamond", 10))
 lb_nombre.place(x=300, y=140)
 
-# caja de texto para ingresar grado
+# caja de texto para ingresar codigo estudiantil
 entry_grado = Entry(frame_entrada, textvariable=codigo)
 entry_grado.config(bg="white", fg="black", font=("garamond", 10), width=6)
 entry_grado.focus_set()
 entry_grado.place(x=366,y=140)
 
-
-
-#run
 ventana_principal.mainloop()
