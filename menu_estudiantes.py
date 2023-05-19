@@ -10,13 +10,26 @@ def abrir_toplevel_datos():
     abrir_toplevel_datos = Toplevel()
     abrir_toplevel_datos.title("lizeth dayana cifuentes ortiz")
     abrir_toplevel_datos.resizable(False,False)
-    abrir_toplevel_datos.geometry("350x350")
+    abrir_toplevel_datos.geometry("350x300")
     abrir_toplevel_datos.config(bg="thistle")
 
     #salir
     def salir():
         messagebox.showinfo("definitiva", "¿desea salir?")
         abrir_toplevel_datos.destroy()
+
+
+    #logo para academico
+    datos=PhotoImage(file="img/aca.png")
+    lb_datos=Label(abrir_toplevel_datos, image=datos, bg="medium purple")
+    lb_datos.config(image=datos, width=150, height=150)
+    lb_datos.place(x=10,y=200)
+
+       
+    #titulo para promedio
+    titulos = Label(abrir_toplevel_datos, text="ingrese los siguientes datos")   
+    titulos.config(bg="cyan", fg="black", font=("garamond", 10))
+    titulos.place(x=40,y=10)
 
     #texto para nota procedimental
     procedimental=Label(abrir_toplevel_datos, text="procedimental:")
@@ -92,11 +105,9 @@ def abrir_toplevel_datos():
         else:
                 messagebox.showinfo("Resultado", "su nota definitiva es:  "+str(entry_not_final))
 # boton para convertir
-    bt_convertir = Button(abrir_toplevel_datos,text="Resultado", command=convertir)
-    bt_convertir.place(x=200, y=250, width=150, height=100)
+    bt_convertir = Button(abrir_toplevel_datos,text="definitiva", command=convertir)
+    bt_convertir.place(x=200, y=230, width=110, height=60)
     
-
-
 
 
 #entrar menu medico general
@@ -105,8 +116,13 @@ def abrir_toplevel_salud():
     abrir_toplevel_salud = Toplevel()
     abrir_toplevel_salud.title("lizeth dayana cifuentes ortiz")
     abrir_toplevel_salud.resizable(False,False)
-    abrir_toplevel_salud.geometry("350x350")
-    abrir_toplevel_salud.config(bg="thistle")    
+    abrir_toplevel_salud.geometry("350x300")
+    abrir_toplevel_salud.config(bg="thistle")  
+
+    #titulo para masa
+    titulos = Label(abrir_toplevel_salud, text="ingrese los siguientes datos")   
+    titulos.config(bg="cyan", fg="black", font=("garamond", 10))
+    titulos.place(x=40,y=10)  
 
     #texto para peso
     peso=Label(abrir_toplevel_salud, text="peso:")
@@ -131,11 +147,10 @@ def abrir_toplevel_salud():
     entry_estatura.place(x=110, y=80)
 
     
-
     def convertir_imc ():
         estatura = float(entry_estatura.get())
         peso = float(entry_peso.get())
-        imc = peso / estatura**2
+        imc = peso/estatura**2
       
         if imc < 16:
             messagebox.showinfo("Resultado","esta muy flaco ")
@@ -154,11 +169,10 @@ def abrir_toplevel_salud():
         else:
              messagebox.showinfo("Resultado","esta en Obesidad grado III")
     # boton para convertir
-    bt_convertir = Button(abrir_toplevel_salud,text="Resultado", command=convertir_imc)
-    bt_convertir.place(x=200, y=170, width=150, height=100)
+    bt_convertir = Button(abrir_toplevel_salud,text="masa corporal", command=convertir_imc)
+    bt_convertir.place(x=200, y=150, width=110, height=50)
     
 
-   
  
 def entrar():
     messagebox.showinfo("informacion", "¿desea ingresar?")
@@ -181,7 +195,7 @@ ventana_principal = Tk()
 ventana_principal.title("lizeth dayana cifuentes ortiz")
 
 # tamaño de la ventana
-ventana_principal.geometry("700x600")
+ventana_principal.geometry("600x600")
 
 # deshabilitar boton de maximizar
 ventana_principal.resizable(False, False)
@@ -198,6 +212,7 @@ codigo = StringVar()
 tarjeta_identidad = StringVar()
 global img_salud
 global img_datos
+global img_aca
 
 #--------------------------------
 # barra menu
@@ -225,7 +240,8 @@ frame_entrada.place(x=10, y=10)
 
 #logo app
 logo=PhotoImage(file="img/escudo_colegio.png")
-lb_logo=Label(ventana_principal, image=logo, bg="thistle")
+lb_logo=Label(ventana_principal, image=logo, bg="medium purple")
+lb_logo.config(image=logo, width=200, height=200)
 lb_logo.place(x=10,y=50)
 
 
@@ -234,6 +250,7 @@ datos=PhotoImage(file="img/datos.png")
 bt_datos =Button(frame_entrada, command=abrir_toplevel_datos)
 bt_datos.config(image=datos, width=150, height=150)
 bt_datos.place(x=50, y=300)
+
 
 #boton para salud
 salud=PhotoImage(file="img/salud.png")
@@ -259,13 +276,13 @@ titulo.place(x=305,y=60)
 
 
 # etiqueta para nombre
-lb_nombre = Label(frame_entrada, text = "nombre: ")
+lb_nombre = Label(frame_entrada, text = "nombre:")
 lb_nombre.config(bg="cyan", fg="black", font=("garamond", 10))
 lb_nombre.place(x=300, y=80)
 
 # caja de texto para ingresar nombre
 entry_nombre = Entry(frame_entrada, textvariable=nombre)
-entry_nombre.config(bg="white", fg="black", font=("garamond", 10), width=6)
+entry_nombre.config(bg="white", fg="black", font=("garamond", 10), width=15)
 entry_nombre.focus_set()
 entry_nombre.place(x=366,y=80)
 
@@ -276,7 +293,7 @@ lb_nombre.place(x=300, y=110)
 
 # caja de texto para ingresar grado
 entry_grado = Entry(frame_entrada, textvariable=grado)
-entry_grado.config(bg="white", fg="black", font=("garamond", 10), width=6)
+entry_grado.config(bg="white", fg="black", font=("garamond", 10), width=15)
 entry_grado.focus_set()
 entry_grado.place(x=366,y=110)
 
@@ -287,7 +304,7 @@ lb_nombre.place(x=300, y=140)
 
 # caja de texto para ingresar codigo estudiantil
 entry_grado = Entry(frame_entrada, textvariable=codigo)
-entry_grado.config(bg="white", fg="black", font=("garamond", 10), width=6)
+entry_grado.config(bg="white", fg="black", font=("garamond", 10), width=15)
 entry_grado.focus_set()
 entry_grado.place(x=366,y=140)
 
